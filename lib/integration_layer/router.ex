@@ -1,5 +1,5 @@
 defmodule IntegrationLayer.Router do
-  import Plug.Conn
+  use Plug.Router
 
   plug :match
   plug :dispatch
