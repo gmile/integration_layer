@@ -14,8 +14,6 @@ defmodule IntegrationLayer.Config do
     else
       key = "/" <> Enum.join(conn.path_info, "/")
 
-      :ets.tab2list(:my_configs)
-
       [{_key, config}] = :ets.lookup(:my_configs, key)
 
       conn
