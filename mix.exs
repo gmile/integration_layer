@@ -14,7 +14,7 @@ defmodule IntegrationLayer.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :plug, :cowboy],
+    [applications: [:logger, :cowboy, :plug],
      mod: {IntegrationLayer, []}]
   end
 
@@ -28,6 +28,9 @@ defmodule IntegrationLayer.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:plug, ">= 0.0.0"}]
+    [
+      {:plug, ">= 0.0.0"},
+      {:cowboy, ">= 0.0.0"},
+    ]
   end
 end
