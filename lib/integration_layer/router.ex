@@ -4,6 +4,10 @@ defmodule IntegrationLayer.Router do
   plug :match
   plug :dispatch
 
+  get "/" do
+    send_resp(conn, 200, "Welcome to the OS.Proxy!")
+  end
+
   get "/authorize" do
     send_resp(conn, 200, "Sucessfully authorize!")
   end
