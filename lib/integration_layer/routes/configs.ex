@@ -1,4 +1,4 @@
-defmodule IntegrationLayer.Routes.Config do
+defmodule IntegrationLayer.Routes.Configs do
   use Plug.Router
 
   plug :match
@@ -6,7 +6,7 @@ defmodule IntegrationLayer.Routes.Config do
 
   get "/" do
     conn  = fetch_query_params(conn)
-    path   = conn.params["config_path"]
+    path   = conn.params["path"]
 
     [{ _key, value }] = :ets.lookup(:my_configs, path)
 
@@ -15,10 +15,10 @@ defmodule IntegrationLayer.Routes.Config do
 
   put "/" do
     conn  = fetch_query_params(conn)
-    path  = conn.params["config_path"]
+    path  = conn.params["path"]
 
-    key   = conn.params["config_key"]
-    value = conn.params["config_value"]
+    key   = conn.params["key"]
+    value = conn.params["value"]
 
     [{ _key, existing_config }] = :ets.lookup(:my_configs, path)
     |> IO.inspect
