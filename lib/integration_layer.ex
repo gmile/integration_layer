@@ -6,8 +6,8 @@ defmodule IntegrationLayer do
 
     :ets.new(:my_configs, [:named_table, :public, :set])
 
-    :ets.insert(:my_configs, {"/create_user", %{ upstream_path: "https://someurl.com/sync/work" }})
-    :ets.insert(:my_configs, {"/create_user_async", %{ upstream_path: "https://someurl.com/async/work" }})
+    :ets.insert(:my_configs, {"/user/create", %{ upstream_path: "https://example.com/sync/work" }})
+    :ets.insert(:my_configs, {"/user/create_async", %{ upstream_path: "https://example.com/async/work" }})
 
     children = [
       Plug.Adapters.Cowboy.child_spec(:http, IntegrationLayer.Router, [], [port: 4000])
