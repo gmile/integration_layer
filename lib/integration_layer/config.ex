@@ -9,7 +9,7 @@ defmodule IntegrationLayer.Config do
     # let's say our keys are "paths".
     # probably should be something smarter than that. "clients" like in Kong?
 
-    if conn.path_info == ["config"] do
+    if conn.path_info == ["configs"] do
       conn
     else
       key = "/" <> Enum.join(conn.path_info, "/")
