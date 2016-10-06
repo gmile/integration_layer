@@ -19,12 +19,16 @@ defmodule IntegrationLayer.Router do
   end
 
   post "/create_user_async" do
-    callback_url = "http://requestb.in/s7wnp7s7"
+    conn  = fetch_query_params(conn)
 
     url_from_config = conn.assigns.config.upstream_path
+    callback_url = conn.params["callback_url"] # "http://requestb.in/s7wnp7s7"
 
     Task.async fn ->
+      # add some headers when sending a response to a backend
       response = HTTPoison.get!(url_from_config, conn.req_headers).body
+
+      # add some headers when sending a response back to original requester
       HTTPoison.post!(callback_url, response)
     end
 
