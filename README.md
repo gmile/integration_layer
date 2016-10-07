@@ -1,27 +1,31 @@
 # IntegrationLayer
 
-**TODO: Add description**
+A toy app to play with ETS and plug.
 
-## Installation
+## Steps
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+1. Fetch dependencies. Run:
 
-  1. Add `integration_layer` to your list of dependencies in `mix.exs`:
+  ```elixir
+mix deps.get
+  ```
 
-    ```elixir
-    def deps do
-      [{:integration_layer, "~> 0.1.0"}]
-    end
-    ```
+2. Start the server and interactive shell. Run
 
-  2. Ensure `integration_layer` is started before your application:
+  ```elixir
+iex -S mix
+  ```
 
-    ```elixir
-    def application do
-      [applications: [:integration_layer]]
-    end
-    ```
+3. Commands to play with. Run from bash shell:
 
-If [published on HexDocs](https://hex.pm/docs/tasks#hex_docs), the docs can
-be found at [https://hexdocs.pm/integration_layer](https://hexdocs.pm/integration_layer)
+  ```bash
+$ curl -i -XGET "http://localhost:4000/configs?path=/user/create"
+$ curl -i -XPOST http://localhost:4000/user/create
+$ curl -i -XPUT "http://localhost:4000/configs?path=/user/create&key=to&value=abc.com"
+$ curl -i -XPUT "http://localhost:4000/configs?path=/user/create&key=new_key&value=new_value"
+$ curl -i -XGET "http://localhost:4000/configs?path=/user/create"
+  ```
 
+4. Excercises to try yourself:
+
+  * Make a plug that will add a header "X-My-Header" to a request. The value of header should be configurable and depend on the route in question (e.g. for "/user/create" it can be "Example 1", while for "/some/path/path" the header value can be "Example 2").
