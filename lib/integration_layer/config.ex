@@ -14,7 +14,8 @@ defmodule IntegrationLayer.Config do
     else
       key = "/" <> Enum.join(conn.path_info, "/")
 
-      [{_key, config}] = :ets.lookup(:my_configs, key)
+      # "from" is hardcoded here
+      [{_key, config}] = :ets.match_object(:my_configs, {:_, %{ from: key }})
 
       conn
       |> assign(:config, config)

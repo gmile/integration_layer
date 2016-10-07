@@ -4,10 +4,13 @@ defmodule IntegrationLayer do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    :ets.new(:my_configs, [:named_table, :public, :set])
+    configs =[
+      {1, %{ from: "/user/create", to: "https://example.com/sync/work" }},
+      {2, %{ from: "/user/create_async", to: "https://example.com/async/work" }}
+    ]
 
-    :ets.insert(:my_configs, {"/user/create", %{ upstream_path: "https://example.com/sync/work" }})
-    :ets.insert(:my_configs, {"/user/create_async", %{ upstream_path: "https://example.com/async/work" }})
+    :ets.new(:my_configs, [:named_table, :public, :set])
+    :ets.insert(:my_configs, configs)
 
     children = [
       Plug.Adapters.Cowboy.child_spec(:http, IntegrationLayer.Router, [], [port: 4000])

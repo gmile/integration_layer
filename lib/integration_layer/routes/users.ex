@@ -5,7 +5,7 @@ defmodule IntegrationLayer.Routes.Users do
   plug :dispatch
 
   post "/create" do
-    fake_response = ~s(Successfully created user using internal "#{conn.assigns.config.upstream_path}" service.)
+    fake_response = ~s(Successfully created user using internal "#{conn.assigns.config.to}" service.)
 
     send_resp(conn, 200, fake_response)
   end
