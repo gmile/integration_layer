@@ -4,6 +4,7 @@ defmodule IntegrationLayer.Router do
   plug IntegrationLayer.Config
   plug IntegrationLayer.Auth
   plug IntegrationLayer.ACL
+  plug IntegrationLayer.CustomHeader
 
   forward "/configs", to: IntegrationLayer.Routes.Configs
   forward "/user", to: IntegrationLayer.Routes.Users

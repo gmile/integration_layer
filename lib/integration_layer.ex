@@ -9,8 +9,16 @@ defmodule IntegrationLayer do
       {2, %{ from: "/user/create_async", to: "https://example.com/async/work" }}
     ]
 
+    headers = [
+      {"/user/create/", "Custom-CreateUserHeader" },
+      {"/user/create_async/", "Custom-CreateUserAsyncHeader" }
+    ]
+
     :ets.new(:my_configs, [:named_table, :public, :set])
     :ets.insert(:my_configs, configs)
+
+    :ets.new(:headers_config, [:named_table, :public, :set])
+    :ets.insert(:headers_config, headers)
 
     children = [
       Plug.Adapters.Cowboy.child_spec(:http, IntegrationLayer.Router, [], [port: 4000])
